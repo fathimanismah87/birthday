@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Jainthu Saithan! 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink:   #ff6eb4;
+  --purple: #a855f7;
+  --yellow: #fbbf24;
+  --orange: #fb923c;
+  --mint:   #34d399;
+  --sky:    #38bdf8;
+  --white:  #ffffff;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ─── Stars ─── */
+.stars {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: twinkle var(--d, 3s) ease-in-out infinite;
+  opacity: 0;
+}
+@keyframes twinkle {
+  0%,100%{opacity:0;transform:scale(0.5)}
+  50%{opacity:1;transform:scale(1)}
+}
+
+/* ─── Floating Shapes ─── */
+.floaters {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  overflow: hidden;
+}
+.floater {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: floatUp var(--fd, 8s) linear infinite;
+  bottom: -50px;
+  opacity: 0.7;
+}
+@keyframes floatUp {
+  0%  { transform: translateY(0) rotate(0deg);   opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100%{ transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
+
+/* ─── Card ─── */
+.card {
+  position: relative;
+  width: min(92vw, 480px);
+  height: min(90vh, 720px);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(24px);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 36px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* ─── Pages ─── */
+.page {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 28px 80px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.34,1.56,.64,1);
+  transform: translateX(60px) scale(0.95);
+}
+.page.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+}
+.page.exit {
+  opacity: 0;
+  transform: translateX(-60px) scale(0.95);
+}
+
+/* ─── PAGE 1 ─── */
+/* Cartoon balloons */
+.balloons {
+  display: flex; gap: 16px; margin-bottom: 18px;
+  position: relative; z-index: 2;
+}
+.balloon {
+  position: relative;
+  width: 54px; height: 64px;
+  border-radius: 50% 50% 46% 46%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  animation: balloonBob var(--bb, 2.2s) ease-in-out infinite;
+  box-shadow: inset -8px -8px 16px rgba(0,0,0,0.2),
+              inset 4px 4px 8px rgba(255,255,255,0.3);
+  cursor: default;
+}
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px; height: 20px;
+  background: rgba(255,255,255,0.5);
+}
+@keyframes balloonBob {
+  0%,100%{ transform: translateY(0) rotate(-4deg); }
+  50%    { transform: translateY(-14px) rotate(4deg); }
+}
+
+.hbd-text {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.4rem, 9vw, 3.5rem);
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, #fbbf24 0%, #fb923c 30%, #f43f5e 60%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: hbdPop 0.8s cubic-bezier(.34,1.56,.64,1) both;
+  filter: drop-shadow(0 4px 12px rgba(251,146,60,0.4));
+}
+@keyframes hbdPop {
+  0% { opacity:0; transform: scale(0.3) rotate(-10deg); }
+  100%{ opacity:1; transform: scale(1) rotate(0deg); }
+}
+
+.name-text {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  color: var(--sky);
+  text-align: center;
+  margin-bottom: 18px;
+  animation: nameSlide 0.7s 0.3s cubic-bezier(.34,1.56,.64,1) both;
+  text-shadow: 0 0 20px rgba(56,189,248,0.5);
+}
+@keyframes nameSlide {
+  0% { opacity:0; transform: translateY(20px); }
+  100%{ opacity:1; transform: translateY(0); }
+}
+
+/* Cartoon character - star */
+.cartoon-star {
+  position: relative;
+  width: 100px; height: 100px;
+  margin: 8px auto 18px;
+  animation: starSpin 4s ease-in-out infinite;
+}
+@keyframes starSpin {
+  0%,100%{ transform: rotate(-8deg) scale(1);   }
+  50%    { transform: rotate(8deg)  scale(1.06); }
+}
+.cartoon-star svg { width: 100%; height: 100%; }
+
+.p1-subtext {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s 0.6s both;
+}
+@keyframes fadeUp {
+  0% { opacity:0; transform: translateY(16px); }
+  100%{ opacity:1; transform: translateY(0); }
+}
+
+/* ─── Buttons ─── */
+.btn {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; align-items: center; gap: 10px;
+}
+.btn:active { transform: scale(0.96) !important; }
+.btn-primary {
+  background: linear-gradient(135deg, #fb923c, #f43f5e);
+  color: white;
+  box-shadow: 0 8px 24px rgba(244,63,94,0.45);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(244,63,94,0.55); }
+
+.btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-secondary {
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  color: white;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+/* ─── PAGE 2 – Song ─── */
+.song-icon {
+  font-size: 4rem; margin-bottom: 12px;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100%{ transform: translateY(0)    scale(1); }
+  50%    { transform: translateY(-12px) scale(1.1); }
+}
+.song-heading {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  color: var(--yellow);
+  margin-bottom: 24px;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(251,191,36,0.5);
+}
+.lyrics-box {
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 22px 28px;
+  margin-bottom: 28px;
+  width: 100%;
+}
+.lyric-line {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  padding: 6px 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.lyric-line.show { opacity: 1; transform: translateX(0); }
+.lyric-line.highlight {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.2rem;
+  color: var(--pink);
+  text-shadow: 0 0 12px rgba(255,110,180,0.5);
+}
+
+.music-bars {
+  display: flex; align-items: flex-end; gap: 5px; height: 40px;
+  justify-content: center; margin-bottom: 22px;
+}
+.music-bar {
+  width: 7px;
+  background: linear-gradient(to top, var(--purple), var(--pink));
+  border-radius: 4px;
+  animation: barAnim var(--bd, 0.6s) ease-in-out infinite alternate;
+}
+@keyframes barAnim {
+  0%  { height: 6px; }
+  100%{ height: 34px; }
+}
+
+/* ─── PAGE 3 – Candle ─── */
+.candle-heading {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  color: var(--yellow);
+  text-align: center;
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(251,191,36,0.5);
+}
+.candle-hint {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+  margin-bottom: 30px;
+}
+.candle-wrap {
+  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center;
+  margin-bottom: 30px;
+  user-select: none;
+  transition: transform 0.2s;
+}
+.candle-wrap:active { transform: scale(0.96); }
+
+/* flame */
+.flame-svg { width: 60px; height: 90px; margin-bottom: -4px; }
+.flame-body {
+  animation: flameDance 0.4s ease-in-out infinite alternate;
+  transform-origin: 50% 90%;
+}
+@keyframes flameDance {
+  0%  { transform: scaleX(1)    skewX(-3deg); }
+  100%{ transform: scaleX(1.08) skewX(4deg); }
+}
+
+/* candle body */
+.candle-body-svg { width: 54px; }
+
+.smoke-wrap { display: none; }
+.smoke-path {
+  stroke: rgba(200,200,220,0.7);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  animation: smokeDrift 1.5s ease-in-out infinite;
+}
+@keyframes smokeDrift {
+  0%  { d: path('M30 100 Q28 70 30 50'); opacity: 0.8; }
+  50% { d: path('M30 100 Q35 70 28 50'); opacity: 0.5; }
+  100%{ d: path('M30 100 Q25 70 32 50'); opacity: 0; }
+}
+
+.wish-granted {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3rem;
+  color: var(--mint);
+  text-align: center;
+  display: none;
+  animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1);
+  margin-bottom: 16px;
+}
+@keyframes popIn {
+  0%  { opacity:0; transform: scale(0.4) rotate(-6deg); }
+  100%{ opacity:1; transform: scale(1)   rotate(0deg);  }
+}
+
+/* ─── PAGE 4 – Cake ─── */
+.cake-heading {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
+  color: var(--pink);
+  text-align: center;
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(255,110,180,0.4);
+}
+.cake-hint {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  margin-bottom: 18px;
+}
+#cakeCanvas {
+  border-radius: 18px;
+  cursor: crosshair;
+  touch-action: none;
+  display: block;
+  background: transparent;
+  max-width: 100%;
+}
+.cut-msg {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.4rem;
+  color: var(--yellow);
+  text-align: center;
+  margin-top: 16px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s, transform 0.4s cubic-bezier(.34,1.56,.64,1);
+}
+.cut-msg.show { opacity: 1; transform: scale(1); }
+
+/* ─── Nav Dots ─── */
+.nav-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px;
+  z-index: 20;
+}
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  border: 1.5px solid rgba(255,255,255,0.2);
+}
+.dot.on {
+  background: white;
+  transform: scale(1.35);
+  box-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+/* ─── Confetti ─── */
+.confetti-piece {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: confettiFall var(--cd,2s) var(--ce,ease-in) var(--cdelay,0s) forwards;
+}
+@keyframes confettiFall {
+  0%   { opacity:1; transform: translate(0,0) rotate(0deg) scale(1); }
+  100% { opacity:0; transform: translate(var(--cx,50px), 110vh) rotate(720deg) scale(0.5); }
+}
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+<!-- Floating emojis -->
+<div class="floaters" id="floaters"></div>
+
+<div class="card">
+
+  <!-- ════ PAGE 1 ════ -->
+  <div class="page active" id="p1">
+    <!-- Balloons -->
+    <div class="balloons">
+      <div class="balloon" style="background:var(--pink);--bb:2.0s">🎈</div>
+      <div class="balloon" style="background:var(--yellow);--bb:2.5s">🎀</div>
+      <div class="balloon" style="background:var(--purple);--bb:1.8s">🎈</div>
+      <div class="balloon" style="background:var(--mint);--bb:2.3s">🎊</div>
+    </div>
+
+    <!-- Animated cartoon star character -->
+    <div class="cartoon-star">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- star body -->
+        <polygon points="100,18 120,72 178,72 132,108 150,162 100,128 50,162 68,108 22,72 80,72"
+                 fill="url(#starGrad)" stroke="#fb923c" stroke-width="3"/>
+        <defs>
+          <radialGradient id="starGrad" cx="40%" cy="35%">
+            <stop offset="0%" stop-color="#fde68a"/>
+            <stop offset="100%" stop-color="#fb923c"/>
+          </radialGradient>
+        </defs>
+        <!-- eyes -->
+        <ellipse cx="83" cy="95" rx="9" ry="11" fill="white"/>
+        <ellipse cx="117" cy="95" rx="9" ry="11" fill="white"/>
+        <circle cx="85" cy="97" r="5" fill="#1e293b"/>
+        <circle cx="119" cy="97" r="5" fill="#1e293b"/>
+        <circle cx="87" cy="94" r="2" fill="white"/>
+        <circle cx="121" cy="94" r="2" fill="white"/>
+        <!-- smile -->
+        <path d="M84 115 Q100 130 116 115" stroke="#1e293b" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <!-- cheeks -->
+        <ellipse cx="72" cy="112" rx="9" ry="6" fill="#f9a8d4" opacity="0.7"/>
+        <ellipse cx="128" cy="112" rx="9" ry="6" fill="#f9a8d4" opacity="0.7"/>
+        <!-- hat -->
+        <rect x="78" y="22" width="44" height="8" rx="4" fill="#7c3aed"/>
+        <polygon points="100,4 82,22 118,22" fill="#a855f7"/>
+        <circle cx="100" cy="4" r="4" fill="#fbbf24"/>
+      </svg>
+    </div>
+
+    <div class="hbd-text">Happy Birthday!</div>
+    <div class="name-text">🌟 Sri Jainthu 🌟</div>
+    <p class="p1-subtext">Wishing you a day overflowing with<br>love, laughter & endless joy! 🎉</p>
+
+    <button class="btn btn-primary" onclick="goTo(2)">
+      Next &nbsp;🎵
+    </button>
+  </div>
+
+  <!-- ════ PAGE 2 ════ -->
+  <div class="page" id="p2">
+    <div class="song-icon">🎂</div>
+    <div class="song-heading">🎵 Birthday Song 🎵</div>
+
+    <div class="lyrics-box">
+      <div class="lyric-line" id="l0">♪ Kappy poranthanaal Jainthu Saithan 😂</div>
+      <div class="lyric-line" id="l1">♪ Kappy poranthanaal Jainthu guru😍</div>
+      <div class="lyric-line highlight" id="l2">♫ Happy birthday dear Kutty paiiya❤️😂</div>
+      <div class="lyric-line" id="l3">♪ Happy birthday to you! 🎉</div>
+    </div>
+
+    <div class="music-bars">
+      <div class="music-bar" style="--bd:0.45s;height:12px"></div>
+      <div class="music-bar" style="--bd:0.6s;height:28px"></div>
+      <div class="music-bar" style="--bd:0.5s;height:20px"></div>
+      <div class="music-bar" style="--bd:0.7s;height:34px"></div>
+      <div class="music-bar" style="--bd:0.4s;height:16px"></div>
+      <div class="music-bar" style="--bd:0.65s;height:30px"></div>
+      <div class="music-bar" style="--bd:0.55s;height:22px"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(1)">← Back</button>
+      <button class="btn btn-primary"   onclick="goTo(3)">Next 🕯️</button>
+    </div>
+  </div>
+
+  <!-- ════ PAGE 3 ════ -->
+  <div class="page" id="p3">
+    <div class="candle-heading">Make a Wish! ✨</div>
+    <p class="candle-hint">Tap the flame to blow out the candle</p>
+
+    <div class="candle-wrap" id="candleWrap" onclick="blowCandle()">
+      <!-- Flame SVG -->
+      <svg class="flame-svg" id="flameSVG" viewBox="0 0 60 90">
+        <defs>
+          <radialGradient id="flameG" cx="50%" cy="80%">
+            <stop offset="0%"   stop-color="#fff7aa"/>
+            <stop offset="40%"  stop-color="#fbbf24"/>
+            <stop offset="75%"  stop-color="#fb923c"/>
+            <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="innerG" cx="50%" cy="70%">
+            <stop offset="0%"   stop-color="white"/>
+            <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g class="flame-body">
+          <!-- outer glow -->
+          <ellipse cx="30" cy="58" rx="20" ry="30" fill="url(#flameG)"/>
+          <!-- inner bright -->
+          <ellipse cx="30" cy="65" rx="10" ry="16" fill="url(#innerG)" opacity="0.9"/>
+        </g>
+        <!-- wick glow -->
+        <circle cx="30" cy="84" r="4" fill="#fde68a" opacity="0.6" filter="url(#glow)"/>
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+      </svg>
+
+      <!-- Smoke (hidden until blown) -->
+      <svg class="smoke-wrap" id="smokeEl" viewBox="0 0 60 110" width="60" height="110" style="margin-bottom:-4px">
+        <path class="smoke-path" d="M30 110 Q24 85 32 62" stroke-dasharray="4 4"/>
+        <path class="smoke-path" d="M30 110 Q36 80 26 55" stroke-dasharray="4 4"
+              style="animation-delay:0.4s;opacity:0.5"/>
+      </svg>
+
+      <!-- Candle body SVG -->
+      <svg class="candle-body-svg" viewBox="0 0 54 120">
+        <defs>
+          <linearGradient id="waxG" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%"   stop-color="#e2e8f0"/>
+            <stop offset="40%"  stop-color="#fff"/>
+            <stop offset="100%" stop-color="#cbd5e1"/>
+          </linearGradient>
+        </defs>
+        <!-- wax drips -->
+        <ellipse cx="16" cy="10" rx="6" ry="4" fill="#fde68a" opacity="0.7"/>
+        <ellipse cx="38" cy="8"  rx="5" ry="3" fill="#fde68a" opacity="0.6"/>
+        <!-- candle body -->
+        <rect x="10" y="10" width="34" height="100" rx="6" fill="url(#waxG)"/>
+        <!-- stripes -->
+        <rect x="10" y="30" width="34" height="6"  rx="3" fill="#fca5a5" opacity="0.4"/>
+        <rect x="10" y="50" width="34" height="6"  rx="3" fill="#86efac" opacity="0.4"/>
+        <rect x="10" y="70" width="34" height="6"  rx="3" fill="#93c5fd" opacity="0.4"/>
+        <rect x="10" y="90" width="34" height="6"  rx="3" fill="#fca5a5" opacity="0.4"/>
+        <!-- shine -->
+        <rect x="14" y="14" width="8" height="88" rx="4" fill="white" opacity="0.25"/>
+        <!-- wick -->
+        <line x1="27" y1="8" x2="27" y2="12" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="wish-granted" id="wishMsg">✨ Wish Granted! ✨<br><small style="font-family:Nunito;font-size:0.9rem;color:rgba(255,255,255,0.7)">Your wish is on its way 🌟</small></div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(2)">← Back</button>
+      <button class="btn btn-primary"   id="candleNextBtn" onclick="goTo(4)" style="opacity:0.35;pointer-events:none;">Next 🎂</button>
+    </div>
+  </div>
+
+  <!-- ════ PAGE 4 ════ -->
+  <div class="page" id="p4">
+    <div class="cake-heading">Cut the Cake! 🎂</div>
+    <p class="cake-hint">Swipe / drag across the cake to cut it</p>
+
+    <canvas id="cakeCanvas" width="340" height="260"></canvas>
+
+    <div class="cut-msg" id="cutMsg">🎉 Yay! Happy Birthday Saithaan! 🎂</div>
+
+    <div class="btn-row" style="margin-top:14px">
+      <button class="btn btn-secondary" onclick="goTo(3)">← Back</button>
+      <button class="btn btn-secondary" onclick="resetCake()" style="font-size:0.95rem;padding:12px 22px;">🔄 Reset</button>
+    </div>
+  </div>
+
+  <!-- Nav Dots -->
+  <div class="nav-dots">
+    <div class="dot on"  onclick="goTo(1)"></div>
+    <div class="dot"     onclick="goTo(2)"></div>
+    <div class="dot"     onclick="goTo(3)"></div>
+    <div class="dot"     onclick="goTo(4)"></div>
+  </div>
+</div>
+
+<script>
+/* ─── STARS ─── */
+(function(){
+  const c = document.getElementById('stars');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div'); s.className='star';
+    const sz=Math.random()*3+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s`;
+    c.appendChild(s);
+  }
+})();
+
+/* ─── FLOATERS ─── */
+(function(){
+  const emojis=['🎈','🎉','✨','🌟','🎀','🥳','💫','🎁','🎊','🍬','🎶'];
+  const c=document.getElementById('floaters');
+  for(let i=0;i<18;i++){
+    const el=document.createElement('div'); el.className='floater';
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText=`left:${Math.random()*100}%;font-size:${1.2+Math.random()*1.5}rem;--fd:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s`;
+    c.appendChild(el);
+  }
+})();
+
+/* ─── PAGE NAVIGATION ─── */
+let cur = 1;
+function goTo(n){
+  if(n===cur) return;
+  const from=document.getElementById(`p${cur}`);
+  const to=document.getElementById(`p${n}`);
+  from.classList.add('exit');
+  setTimeout(()=>{ from.classList.remove('active','exit'); },450);
+  setTimeout(()=>{ to.classList.add('active'); },200);
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===n-1));
+  cur=n;
+  if(n===2) animateLyrics();
+  if(n===4) drawCake();
+}
+
+/* ─── LYRICS ANIMATION ─── */
+function animateLyrics(){
+  ['l0','l1','l2','l3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.classList.remove('show');
+    setTimeout(()=>el.classList.add('show'), 300+i*400);
+  });
+}
+
+/* ─── WEB AUDIO – Birthday melody ─── */
+let _ac=null;
+function getAC(){ if(!_ac){ _ac=new(window.AudioContext||window.webkitAudioContext)(); } return _ac; }
+function playNote(freq,start,dur){
+  const ac=getAC();
+  const o=ac.createOscillator(), g=ac.createGain();
+  o.type='sine'; o.frequency.value=freq;
+  g.gain.setValueAtTime(0,ac.currentTime+start);
+  g.gain.linearRampToValueAtTime(0.25,ac.currentTime+start+0.03);
+  g.gain.setValueAtTime(0.25,ac.currentTime+start+dur-0.05);
+  g.gain.linearRampToValueAtTime(0,ac.currentTime+start+dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(ac.currentTime+start); o.stop(ac.currentTime+start+dur);
+}
+(function schedBday(){
+  // C4=262 D4=294 E4=330 F4=349 G4=392 A4=440
+  const M=[ [262,0,0.4],[262,0.45,0.2],[294,0.7,0.6],[262,1.4,0.6],[349,2.1,0.6],[330,2.8,1.1],
+            [262,4.1,0.4],[262,4.55,0.2],[294,4.8,0.6],[262,5.5,0.6],[392,6.2,0.6],[349,6.9,1.1],
+            [262,8.2,0.4],[262,8.65,0.2],[523,9.0,0.6],[440,9.7,0.6],[349,10.4,0.6],[330,11.1,0.6],[294,11.8,1.1],
+            [466,13.0,0.4],[466,13.45,0.2],[440,13.7,0.6],[349,14.4,0.6],[392,15.1,0.6],[349,15.8,1.2] ];
+  document.addEventListener('click',function play(){
+    M.forEach(([f,s,d])=>playNote(f,s,d));
+    document.removeEventListener('click',play);
+  },{once:true});
+})();
+
+/* ─── CANDLE ─── */
+let blown=false;
+function blowCandle(){
+  if(blown) return;
+  blown=true;
+  const flame=document.getElementById('flameSVG');
+  const smoke=document.getElementById('smokeEl');
+  const msg=document.getElementById('wishMsg');
+  const nextBtn=document.getElementById('candleNextBtn');
+
+  flame.style.transition='opacity 0.5s, transform 0.5s';
+  flame.style.opacity='0';
+  flame.style.transform='translateY(-20px) scale(0.2)';
+
+  setTimeout(()=>{ smoke.style.display='block'; },500);
+  setTimeout(()=>{
+    msg.style.display='block';
+    nextBtn.style.opacity='1';
+    nextBtn.style.pointerEvents='auto';
+    spawnConfetti(30);
+  },900);
+}
+
+/* ─── CAKE CANVAS ─── */
+let cakeCtx, cutting=false, cakeCut=false, cuts=[];
+function drawCake(){
+  const cv=document.getElementById('cakeCanvas');
+  cakeCtx=cv.getContext('2d');
+  const W=cv.width, H=cv.height;
+  cakeCtx.clearRect(0,0,W,H);
+  cuts=[];
+
+  // Plate
+  cakeCtx.fillStyle='rgba(255,255,255,0.08)';
+  cakeCtx.beginPath();
+  cakeCtx.ellipse(W/2,H-24,W*0.42,18,0,0,Math.PI*2);
+  cakeCtx.fill();
+
+  // Bottom tier
+  roundRect(cakeCtx, W/2-120,H-100, 240,80, 10, '#f9a8d4');
+  roundRect(cakeCtx, W/2-120,H-100, 240,80, 10, null,'#ec4899',3);
+  // frosting drips
+  drawDrips(W/2-120,H-100,240,'#fce7f3');
+  // stripe layer
+  cakeCtx.fillStyle='#fbcfe8'; cakeCtx.fillRect(W/2-120,H-62,240,10);
+  cakeCtx.fillStyle='#f9a8d4'; cakeCtx.fillRect(W/2-120,H-40,240,8);
+
+  // Middle tier
+  roundRect(cakeCtx, W/2-90,H-175, 180,80, 10,'#c4b5fd');
+  roundRect(cakeCtx, W/2-90,H-175, 180,80, 10,null,'#7c3aed',3);
+  drawDrips(W/2-90,H-175,180,'#ede9fe');
+  cakeCtx.fillStyle='#ddd6fe'; cakeCtx.fillRect(W/2-90,H-138,180,10);
+
+  // Top tier
+  roundRect(cakeCtx, W/2-55,H-240, 110,70, 10,'#fed7aa');
+  roundRect(cakeCtx, W/2-55,H-240, 110,70, 10,null,'#ea580c',3);
+  drawDrips(W/2-55,H-240,110,'#ffedd5');
+
+  // Candles on top
+  const candleXs=[W/2-30,W/2,W/2+30];
+  candleXs.forEach(cx=>{
+    // candle
+    cakeCtx.fillStyle='#fff'; roundRectFill(cakeCtx,cx-4,H-265,8,28,3);
+    // flame
+    const gr=cakeCtx.createRadialGradient(cx,H-270,1,cx,H-268,8);
+    gr.addColorStop(0,'#fef9c3'); gr.addColorStop(0.6,'#fbbf24'); gr.addColorStop(1,'transparent');
+    cakeCtx.fillStyle=gr;
+    cakeCtx.beginPath();
+    cakeCtx.ellipse(cx,H-270,5,10,0,0,Math.PI*2);
+    cakeCtx.fill();
+  });
+
+  // Stars decoration
+  const stars=['⭐','🌸','💜','💗'];
+  cakeCtx.font='16px serif';
+  [[W/2-95,H-55],[W/2+75,H-55],[W/2-70,H-145],[W/2+50,H-145]].forEach(([x,y],i)=>{
+    cakeCtx.fillText(stars[i%stars.length],x,y);
+  });
+
+  // "Happy Birthday" on cake
+  cakeCtx.font="bold 13px 'Fredoka One', Nunito";
+  cakeCtx.fillStyle='white';
+  cakeCtx.textAlign='center';
+  cakeCtx.shadowColor='rgba(0,0,0,0.3)';
+  cakeCtx.shadowBlur=4;
+  cakeCtx.fillText('Happy Birthday!',W/2,H-128);
+  cakeCtx.shadowBlur=0;
+
+  // Redraw cuts
+  cuts.forEach(c=>drawCutLine(c.x1,c.y1,c.x2,c.y2));
+
+  // Events
+  cv.onmousedown = e=>{ cutting=true; const r=cv.getBoundingClientRect(); cuts.push({x1:e.clientX-r.left,y1:e.clientY-r.top,x2:e.clientX-r.left,y2:e.clientY-r.top}); };
+  cv.onmousemove = e=>{ if(!cutting)return; const r=cv.getBoundingClientRect(); const x=e.clientX-r.left,y=e.clientY-r.top; if(cuts.length){ const last=cuts[cuts.length-1]; drawCutLine(last.x2,last.y2,x,y); last.x2=x; last.y2=y; checkCut(); } };
+  cv.onmouseup = cv.onmouseleave = ()=>cutting=false;
+
+  cv.ontouchstart = e=>{ e.preventDefault(); cutting=true; const r=cv.getBoundingClientRect(); const t=e.touches[0]; cuts.push({x1:t.clientX-r.left,y1:t.clientY-r.top,x2:t.clientX-r.left,y2:t.clientY-r.top}); };
+  cv.ontouchmove  = e=>{ e.preventDefault(); if(!cutting)return; const r=cv.getBoundingClientRect(); const t=e.touches[0]; const x=t.clientX-r.left,y=t.clientY-r.top; if(cuts.length){ const last=cuts[cuts.length-1]; drawCutLine(last.x2,last.y2,x,y); last.x2=x; last.y2=y; checkCut(); } };
+  cv.ontouchend = ()=>cutting=false;
+}
+
+function roundRect(ctx,x,y,w,h,r,fill,stroke,sw){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+  if(fill){ ctx.fillStyle=fill; ctx.fill(); }
+  if(stroke){ ctx.strokeStyle=stroke; ctx.lineWidth=sw||2; ctx.stroke(); }
+}
+function roundRectFill(ctx,x,y,w,h,r){ roundRect(ctx,x,y,w,h,r,'#fff'); }
+
+function drawDrips(x,y,w,color){
+  cakeCtx.fillStyle=color;
+  for(let i=0;i<6;i++){
+    const dx=x+20+i*(w-40)/5;
+    const dh=8+Math.sin(i*1.3)*6;
+    cakeCtx.beginPath();
+    cakeCtx.ellipse(dx,y+dh,6,dh,0,0,Math.PI*2);
+    cakeCtx.fill();
+  }
+}
+
+function drawCutLine(x1,y1,x2,y2){
+  cakeCtx.save();
+  cakeCtx.strokeStyle='rgba(255,255,255,0.9)';
+  cakeCtx.lineWidth=3;
+  cakeCtx.lineCap='round';
+  cakeCtx.shadowColor='rgba(255,255,255,0.8)';
+  cakeCtx.shadowBlur=6;
+  cakeCtx.beginPath();
+  cakeCtx.moveTo(x1,y1); cakeCtx.lineTo(x2,y2);
+  cakeCtx.stroke();
+  cakeCtx.restore();
+}
+
+function checkCut(){
+  if(cakeCut) return;
+  const total=cuts.reduce((s,c)=>{
+    const dx=c.x2-c.x1, dy=c.y2-c.y1;
+    return s+Math.sqrt(dx*dx+dy*dy);
+  },0);
+  if(total>100){
+    cakeCut=true;
+    document.getElementById('cutMsg').classList.add('show');
+    spawnConfetti(60);
+  }
+}
+
+function resetCake(){
+  cakeCut=false; cuts=[];
+  document.getElementById('cutMsg').classList.remove('show');
+  drawCake();
+}
+
+/* ─── CONFETTI ─── */
+function spawnConfetti(n){
+  const colors=['#f43f5e','#fbbf24','#34d399','#38bdf8','#a855f7','#fb923c','#fff'];
+  for(let i=0;i<n;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti-piece';
+      const cx=(Math.random()-0.5)*600;
+      el.style.cssText=`
+        left:${30+Math.random()*40}vw;
+        top:${10+Math.random()*30}vh;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        border-radius:${Math.random()>.5?'50%':'2px'};
+        width:${6+Math.random()*8}px;
+        height:${6+Math.random()*8}px;
+        --cx:${cx}px;
+        --cd:${1.5+Math.random()*1.5}s;
+        --ce:${Math.random()>.5?'ease-in':'ease-out'};
+        --cdelay:${Math.random()*0.4}s;
+      `;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),3000);
+    }, i*40);
+  }
+}
+</script>
+</body>
+</html>
