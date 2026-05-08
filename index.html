@@ -672,24 +672,25 @@ function cutCakeAction() {
             return; 
         }
         
+        // Very fast trail clearing
         fCtx.globalCompositeOperation = 'destination-out'; 
-        fCtx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
+        fCtx.fillStyle = 'rgba(0, 0, 0, 0.5)'; 
         fCtx.fillRect(0, 0, fCan.width, fCan.height);
         fCtx.globalCompositeOperation = 'lighter';
 
-        // Frequency of new crackers (0.08 remains standard)
-        if(Math.random() < 0.08) {
+        // Very rare explosions (0.02 probability)
+        if(Math.random() < 0.02) {
             const x = Math.random() * fCan.width;
             const y = Math.random() * fCan.height * 0.4;
-            const col = `hsl(${Math.random() * 360}, 100%, 60%)`;
+            const col = "#D4AF37"; // Single elegant gold color instead of many colors
             
-            // Create particles with very low velocity for slow motion
-            for(let i = 0; i < 30; i++) {
+            // Only 5 tiny sparks per burst
+            for(let i = 0; i < 5; i++) {
                 fws.push({ 
                     x, 
                     y, 
-                    dx: (Math.random() - 0.5) * 1.2, // SLOW horizontal spread
-                    dy: (Math.random() - 0.5) * 1.2, // SLOW vertical spread
+                    dx: (Math.random() - 0.5) * 1.0, 
+                    dy: (Math.random() - 0.5) * 1.0, 
                     a: 1, 
                     c: col 
                 });
@@ -698,13 +699,13 @@ function cutCakeAction() {
 
         fws.forEach((f, i) => { 
             f.x += f.dx; 
-            f.y += f.dy + 0.01; // ALMOST NO GRAVITY (makes them float)
-            f.a -= 0.004;       // SLOW FADE (keeps them visible longer)
+            f.y += f.dy + 0.01; 
+            f.a -= 0.025; // Dissolves almost immediately
             
             fCtx.globalAlpha = f.a; 
             fCtx.fillStyle = f.c; 
             fCtx.beginPath(); 
-            fCtx.arc(f.x, f.y, 2, 0, Math.PI * 2); 
+            fCtx.arc(f.x, f.y, 1, 0, Math.PI * 2); // Tiny 1px "dust" particles
             fCtx.fill(); 
             
             if(f.a <= 0) fws.splice(i, 1); 
