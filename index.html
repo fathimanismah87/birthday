@@ -662,22 +662,58 @@ function cutCakeAction() {
         }
         drawStars();
 
+        
         function initFw() {
-            fwActive = true;
-            let fws = [];
-            function loop() {
-                if(!fwActive) { fCtx.clearRect(0,0,fCan.width,fCan.height); return; }
-                fCtx.globalCompositeOperation = 'destination-out'; fCtx.fillStyle = 'rgba(0,0,0,0.2)'; fCtx.fillRect(0,0,fCan.width,fCan.height);
-                fCtx.globalCompositeOperation = 'lighter';
-                if(Math.random() < 0.08) {
-                    const x = Math.random()*fCan.width, y = Math.random()*fCan.height*0.4, col = `hsl(${Math.random()*360},100%,60%)`;
-                    for(let i=0; i<30; i++) fws.push({ x, y, dx:(Math.random()-0.5)*6, dy:(Math.random()-0.5)*6, a:1, c: col });
-                }
-                fws.forEach((f, i) => { f.x+=f.dx; f.y+=f.dy+0.1; f.a-=0.015; fCtx.globalAlpha=f.a; fCtx.fillStyle=f.c; fCtx.beginPath(); fCtx.arc(f.x,f.y,2,0,Math.PI*2); fCtx.fill(); if(f.a<=0) fws.splice(i,1); });
-                requestAnimationFrame(loop);
-            }
-            loop();
+    fwActive = true;
+    let fws = [];
+    function loop() {
+        if(!fwActive) { 
+            fCtx.clearRect(0, 0, fCan.width, fCan.height); 
+            return; 
         }
+        
+        fCtx.globalCompositeOperation = 'destination-out'; 
+        fCtx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
+        fCtx.fillRect(0, 0, fCan.width, fCan.height);
+        fCtx.globalCompositeOperation = 'lighter';
+
+        // Frequency of new crackers (0.08 remains standard)
+        if(Math.random() < 0.08) {
+            const x = Math.random() * fCan.width;
+            const y = Math.random() * fCan.height * 0.4;
+            const col = `hsl(${Math.random() * 360}, 100%, 60%)`;
+            
+            // Create particles with very low velocity for slow motion
+            for(let i = 0; i < 30; i++) {
+                fws.push({ 
+                    x, 
+                    y, 
+                    dx: (Math.random() - 0.5) * 1.2, // SLOW horizontal spread
+                    dy: (Math.random() - 0.5) * 1.2, // SLOW vertical spread
+                    a: 1, 
+                    c: col 
+                });
+            }
+        }
+
+        fws.forEach((f, i) => { 
+            f.x += f.dx; 
+            f.y += f.dy + 0.01; // ALMOST NO GRAVITY (makes them float)
+            f.a -= 0.004;       // SLOW FADE (keeps them visible longer)
+            
+            fCtx.globalAlpha = f.a; 
+            fCtx.fillStyle = f.c; 
+            fCtx.beginPath(); 
+            fCtx.arc(f.x, f.y, 2, 0, Math.PI * 2); 
+            fCtx.fill(); 
+            
+            if(f.a <= 0) fws.splice(i, 1); 
+        });
+        
+        requestAnimationFrame(loop);
+    }
+    loop();
+}
         function triggerParty() {
     const msg = document.getElementById('cake-celebration-msg');
     const cakeArea = document.querySelector('.cake-canvas-area');
